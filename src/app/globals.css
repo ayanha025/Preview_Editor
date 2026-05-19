@@ -1,26 +1,131 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── hunet 아티클 레이아웃 ── */
+#article-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── hunet CMS 스타일 (실제 사이트와 동일) ── */
+.ck-content {
+  --font-size: 16px;
+  font-size: calc(var(--font-size) * 18 / 16) !important;
+  line-height: calc(var(--font-size) * 40 / 16);
+  letter-spacing: calc(var(--font-size) * -0.2 / 16);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.ck-content .table {
+  margin-block: calc(var(--font-size) * 16.2 / 16);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.ck-content .table table td,
+.ck-content .table table th {
+  padding: calc(var(--font-size) * 7.2 / 16);
+}
+
+.ck-content p {
+  font-size: calc(var(--font-size) * 18 / 16);
+  letter-spacing: calc(var(--font-size) * -0.2 / 16);
+  line-height: calc(var(--font-size) * 30 / 16);
+}
+
+.ck-heading_paragraph {
+  font-size: calc(var(--font-size) * 18 / 16) !important;
+  line-height: calc(var(--font-size) * 30 / 16) !important;
+}
+
+.ck-heading_heading1 {
+  font-size: calc(var(--font-size) * 40 / 16) !important;
+  letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
+  line-height: calc(var(--font-size) * 60 / 16) !important;
+  margin-bottom: calc(var(--font-size) * 32 / 16);
+}
+
+.ck-content h2,
+.ck-heading_heading2 {
+  font-size: calc(var(--font-size) * 24 / 16) !important;
+  letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
+  line-height: calc(var(--font-size) * 38 / 16) !important;
+  margin-bottom: calc(var(--font-size) * 40 / 16);
+}
+
+.ck-content h3,
+.ck-heading_heading3 {
+  font-size: calc(var(--font-size) * 24 / 16) !important;
+  letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
+  line-height: calc(var(--font-size) * 38 / 16) !important;
+  margin-bottom: calc(var(--font-size) * 40 / 16);
+}
+
+.ck-content h4,
+.ck-heading_heading4 {
+  font-size: calc(var(--font-size) * 20 / 16) !important;
+  letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
+  line-height: calc(var(--font-size) * 32 / 16) !important;
+  margin-bottom: calc(var(--font-size) * 12 / 16);
+}
+
+.ck-content h5,
+.ck-heading_heading5 {
+  font-size: calc(var(--font-size) * 14 / 16) !important;
+  letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
+  line-height: calc(var(--font-size) * 26 / 16) !important;
+}
+
+.ck-content blockquote {
+  border-left-width: calc(var(--font-size) * 4 / 16) !important;
+  padding-left: calc(var(--font-size) * 16 / 16);
+}
+
+.ck-content blockquote > p {
+  margin-block: calc(var(--font-size) * 16 / 16);
+}
+
+.ck-content > p {
+  margin-block: calc(var(--font-size) * 18 / 16);
+}
+
+.ck-content ul,
+.ck-content ol {
+  margin-block: calc(var(--font-size) * 16 / 16);
+  padding-inline-start: calc(var(--font-size) * 40 / 16);
+}
+
+.ck-content hr {
+  height: calc(var(--font-size) * 2 / 16);
+  top: calc(var(--font-size) * 16 / 16);
+}
+
+.hunet_osmu_article .articleDiv01 {
+  background-color: #f2f4f6;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-block: 16px;
+}
+
+.hunet_osmu_article .articleDiv01 li {
+  font-size: calc(var(--font-size) * 18 / 16);
+  letter-spacing: calc(var(--font-size) * -0.2 / 16);
+  line-height: calc(var(--font-size) * 30 / 16);
+  margin-bottom: calc(var(--font-size) * 6 / 16);
+}
+
+/* 편집 모드 하이라이트 */
+[data-edit-mode="true"] .ck-content [contenteditable="true"]:focus {
+  outline: 2px solid #415AEE;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* 이미지 편집 모드 커서 */
+[data-edit-mode="true"] img {
+  cursor: pointer;
+}
+[data-edit-mode="true"] img:hover {
+  opacity: 0.85;
+  outline: 2px dashed #415AEE;
 }
