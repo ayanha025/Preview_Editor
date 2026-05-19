@@ -23,7 +23,15 @@ export async function POST(req: NextRequest) {
     approvedAt: null,
   }
 
-  await saveArticle(article)
+  try {
+    await saveArticle(article)
+  } catch (error) {
+    console.error('Failed to save article:', error)
+    return NextResponse.json(
+      { error: 'Failed to save article' },
+      { status: 500 }
+    )
+  }
 
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL ??

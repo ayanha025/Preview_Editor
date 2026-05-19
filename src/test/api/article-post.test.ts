@@ -2,10 +2,6 @@ import { describe, it, expect, vi } from 'vitest'
 import { POST } from '@/app/api/article/route'
 import { NextRequest } from 'next/server'
 
-vi.mock('@vercel/kv', () => ({
-  kv: { set: vi.fn().mockResolvedValue('OK') },
-}))
-
 vi.mock('@/lib/kv', () => ({
   saveArticle: vi.fn().mockResolvedValue(undefined),
 }))
@@ -27,7 +23,7 @@ describe('POST /api/article', () => {
 
     expect(res.status).toBe(201)
     expect(data.id).toBeDefined()
-    expect(data.editorUrl).toMatch(/\/editor\/[a-f0-9-]{36}/)
+    expect(data.editorUrl).toBe(`http://localhost:3000/editor/${data.id}`)
   })
 
   it('title 없으면 400 반환', async () => {
@@ -38,6 +34,7 @@ describe('POST /api/article', () => {
 
     const res = await POST(req)
     expect(res.status).toBe(400)
+    expect((await res.json()).error).toBe('title and html are required')
   })
 
   it('html 없으면 400 반환', async () => {
@@ -48,5 +45,6 @@ describe('POST /api/article', () => {
 
     const res = await POST(req)
     expect(res.status).toBe(400)
+    expect((await res.json()).error).toBe('title and html are required')
   })
 })
