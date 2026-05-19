@@ -24,7 +24,7 @@ describe('GET /api/article/[id]', () => {
     vi.mocked(getArticleById).mockResolvedValue(mockArticle)
 
     const req = new NextRequest('http://localhost/api/article/test-id-123')
-    const res = await GET(req, { params: { id: 'test-id-123' } })
+    const res = await GET(req, { params: Promise.resolve({ id: 'test-id-123' }) })
     const data = await res.json()
 
     expect(res.status).toBe(200)
@@ -36,7 +36,7 @@ describe('GET /api/article/[id]', () => {
     vi.mocked(getArticleById).mockResolvedValue(null)
 
     const req = new NextRequest('http://localhost/api/article/no-such-id')
-    const res = await GET(req, { params: { id: 'no-such-id' } })
+    const res = await GET(req, { params: Promise.resolve({ id: 'no-such-id' }) })
 
     expect(res.status).toBe(404)
   })
@@ -52,7 +52,7 @@ describe('PATCH /api/article/[id]', () => {
       body: JSON.stringify({ html: updatedHtml }),
     })
 
-    const res = await PATCH(req, { params: { id: 'test-id-123' } })
+    const res = await PATCH(req, { params: Promise.resolve({ id: 'test-id-123' }) })
     const data = await res.json()
 
     expect(res.status).toBe(200)
@@ -72,7 +72,7 @@ describe('PATCH /api/article/[id]', () => {
       body: JSON.stringify({ html: '<article/>' }),
     })
 
-    const res = await PATCH(req, { params: { id: 'no-such-id' } })
+    const res = await PATCH(req, { params: Promise.resolve({ id: 'no-such-id' }) })
     expect(res.status).toBe(404)
   })
 
@@ -84,7 +84,7 @@ describe('PATCH /api/article/[id]', () => {
       body: JSON.stringify({}),
     })
 
-    const res = await PATCH(req, { params: { id: 'test-id-123' } })
+    const res = await PATCH(req, { params: Promise.resolve({ id: 'test-id-123' }) })
     expect(res.status).toBe(400)
     expect((await res.json()).error).toBe('html is required')
   })

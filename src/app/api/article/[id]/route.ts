@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getArticleById, saveArticle } from '@/lib/kv'
 import type { ApproveArticleBody } from '@/lib/types'
 
-type RouteContext = { params: { id: string } }
+type RouteContext = { params: Promise<{ id: string }> }
 
 export async function GET(_req: NextRequest, { params }: RouteContext) {
   try {
-    const article = await getArticleById(params.id)
+    const { id } = await params
+    const article = await getArticleById(id)
     if (!article) {
       return NextResponse.json({ error: 'Article not found' }, { status: 404 })
     }
@@ -18,7 +19,8 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
 
 export async function PATCH(req: NextRequest, { params }: RouteContext) {
   try {
-    const article = await getArticleById(params.id)
+    const { id } = await params
+    const article = await getArticleById(id)
     if (!article) {
       return NextResponse.json({ error: 'Article not found' }, { status: 404 })
     }
