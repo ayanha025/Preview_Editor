@@ -75,4 +75,17 @@ describe('PATCH /api/article/[id]', () => {
     const res = await PATCH(req, { params: { id: 'no-such-id' } })
     expect(res.status).toBe(404)
   })
+
+  it('html 없으면 400 반환', async () => {
+    vi.mocked(getArticleById).mockResolvedValue(mockArticle)
+
+    const req = new NextRequest('http://localhost/api/article/test-id-123', {
+      method: 'PATCH',
+      body: JSON.stringify({}),
+    })
+
+    const res = await PATCH(req, { params: { id: 'test-id-123' } })
+    expect(res.status).toBe(400)
+    expect((await res.json()).error).toBe('html is required')
+  })
 })
