@@ -1,21 +1,25 @@
+@import url('https://cdn.jsdelivr.net/npm/pretendard@latest/dist/web/static/pretendard.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ── hunet 아티클 레이아웃 ── */
 #article-container {
-  max-width: 720px;
+  max-width: 768px;
   margin: 0 auto;
-  padding: 0 24px;
-  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  padding: 0 40px;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 }
 
 /* ── hunet CMS 스타일 (실제 사이트와 동일) ── */
 .ck-content {
   --font-size: 16px;
   font-size: calc(var(--font-size) * 18 / 16) !important;
-  line-height: calc(var(--font-size) * 40 / 16);
+  font-weight: 300;
+  line-height: calc(var(--font-size) * 30 / 16);
   letter-spacing: calc(var(--font-size) * -0.2 / 16);
+  color: #212529;
 }
 
 .ck-content .table {
@@ -48,6 +52,7 @@
 .ck-content h2,
 .ck-heading_heading2 {
   font-size: calc(var(--font-size) * 24 / 16) !important;
+  font-weight: 600 !important;
   letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
   line-height: calc(var(--font-size) * 38 / 16) !important;
   margin-bottom: calc(var(--font-size) * 40 / 16);
@@ -56,6 +61,7 @@
 .ck-content h3,
 .ck-heading_heading3 {
   font-size: calc(var(--font-size) * 24 / 16) !important;
+  font-weight: 600 !important;
   letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
   line-height: calc(var(--font-size) * 38 / 16) !important;
   margin-bottom: calc(var(--font-size) * 40 / 16);
@@ -63,10 +69,25 @@
 
 .ck-content h4,
 .ck-heading_heading4 {
-  font-size: calc(var(--font-size) * 20 / 16) !important;
+  font-size: calc(var(--font-size) * 24 / 16) !important;
+  font-weight: 600 !important;
   letter-spacing: calc(var(--font-size) * -0.2 / 16) !important;
-  line-height: calc(var(--font-size) * 32 / 16) !important;
-  margin-bottom: calc(var(--font-size) * 12 / 16);
+  line-height: calc(var(--font-size) * 38 / 16) !important;
+  margin-top: calc(var(--font-size) * 80 / 16);
+  margin-bottom: calc(var(--font-size) * 40 / 16);
+  padding-top: calc(2px + 24px);
+  position: relative;
+}
+
+.ck-content h4::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 78px;
+  height: 2px;
+  background-color: #212529;
 }
 
 .ck-content h5,
