@@ -1,7 +1,7 @@
 # 아티클 프리뷰 에디터 사용 가이드
 
 **배포 URL:** https://article-preview-gold.vercel.app  
-**Confluence 사이트:** https://ttalkkak.atlassian.net
+**Confluence 사이트:** https://ihunet.atlassian.net
 
 ---
 
